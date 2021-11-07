@@ -172,7 +172,7 @@
         cy.get('[type="checkbox"]').eq(1).check({force: true})
     })
 
-    it.only('lists and dropdowns', () => {
+    it('lists and dropdowns', () => {
         cy.visit('/')
 
         //1 Check dark theme exists & select it, check it works too
@@ -201,8 +201,9 @@
                 }
             })
         })
+    })
 
-
-
+    it.only('test idk', () => {
+        
     })
  })
