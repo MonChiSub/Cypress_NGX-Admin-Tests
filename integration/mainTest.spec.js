@@ -34,9 +34,6 @@ describe('Test with backend', () => {
     })
 
     it.skip('intercepting and modifying the request and response', () => {
-        // cy.intercept('POST', '**/api.realworld.io/api/articles*', (req) => {
-        //     req.body.article.description = "This is a modified description"
-        // }).as('postArticles')
 
         cy.intercept('POST', '**/api.realworld.io/api/articles*', (req) => {
             req.reply( res => {
@@ -97,7 +94,7 @@ describe('Test with backend', () => {
 
         cy.get('@token').then( token => {
             cy.request({
-                url: 'https://conduit.productionready.io/api/articles',
+                url: Cypress.env('apiURL')+'/api/articles',
                 headers: { 'Authorization': 'Token '+token},
                 method: 'POST',
                 body: bodyRequest
@@ -110,7 +107,7 @@ describe('Test with backend', () => {
             cy.get('.article-actions').contains('Delete Article').click()
     
             cy.request({
-                url: 'https://conduit.productionready.io/api/articles?limit=10&offset=0',
+                url: Cypress.env('apiURL')+'api/articles?limit=10&offset=0',
                 headers: { 'Authorization': 'Token '+token},
                 method: 'GET'
             }).its('body').then( body => {
